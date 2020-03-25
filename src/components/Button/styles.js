@@ -9,7 +9,6 @@ export const ButtonDefault = styled.button`
   color: #fff;
   font-weight: 700;
   margin-top: 16px;
-  display: inline-block;
   text-align: center;
   text-decoration: none;
   font-size: 18px;

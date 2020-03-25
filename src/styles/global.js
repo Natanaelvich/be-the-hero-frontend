@@ -15,6 +15,7 @@ html,body,#root{
 }
 body{
   -webkit-font-smoothing: antialiased !important;
+  background : #f5f5f5;
 }
 body,input,button,textarea{
     font : 400 14px Roboto, sans-serif;

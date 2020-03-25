@@ -14,7 +14,7 @@ export default function Logon() {
       <Form>
         <img src={logo} alt="be the hero" />
         <form>
-          <h1>Faça se logon</h1>
+          <h1>Faça seu login</h1>
 
           <input placeholder="Sua ID" />
           <Button type="submit">Entrar</Button>

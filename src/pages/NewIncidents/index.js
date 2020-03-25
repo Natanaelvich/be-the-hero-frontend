@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Container } from './styles';
 
-export default function Home() {
+export default function NewIncidents() {
   return (
     <Container>
-      <h1>Home</h1>
+      <h1>Register new Incident</h1>
     </Container>
   );
 }
