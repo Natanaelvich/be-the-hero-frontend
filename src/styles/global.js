@@ -34,6 +34,17 @@ button{
       border-radius : 8px;
   }
 
+  form textarea{
+      width : 100%;
+      height : 140px;
+      color : #333;
+      border :1px solid #dcdce6;
+      padding : 16px 24px;
+      border-radius : 8px;
+      line-height : 24px;
+      resize : vertical;
+  }
+
   a {
       display: flex;
       align-items: center;

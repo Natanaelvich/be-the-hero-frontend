@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdPowerSettingsNew } from 'react-icons/md';
+import api from '../../services/api';
 
-import { Container, Logout, List } from './styles';
+import { Container, Logout } from './styles';
 import logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
 import IncidentsList from '../../components/IncidentsList';
 
 export default function Profile() {
+  const [incidents, setIncidents] = useState([]);
+
+  useEffect(() => {
+    async function loadIncidents() {
+      const response = await api.get('/ongs/incidents');
+      setIncidents(response.data);
+    }
+    loadIncidents();
+  }, []);
   return (
     <Container>
       <header>
@@ -25,7 +35,7 @@ export default function Profile() {
 
       <h1>Casos cadastrados</h1>
 
-      <IncidentsList />
+      <IncidentsList data={incidents} />
     </Container>
   );
 }
