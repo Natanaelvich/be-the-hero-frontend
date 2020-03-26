@@ -33,6 +33,11 @@ export const Container = styled.div`
     margin-top: 80px;
     margin-bottom: 24px;
   }
+
+  h2 {
+    justify-self: center;
+    align-self: center;
+  }
 `;
 
 export const Logout = styled.button`

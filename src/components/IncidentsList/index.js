@@ -3,11 +3,11 @@ import { MdDelete } from 'react-icons/md';
 
 import { List } from './styles';
 
-export default function IncidentsList({ data }) {
+export default function IncidentsList({ data, handleDelete }) {
   return (
     <List>
       {data.map(incident => (
-        <li>
+        <li key={incident.id}>
           <strong>Caso: </strong>
           <p>{incident.title}</p>
 
@@ -15,9 +15,15 @@ export default function IncidentsList({ data }) {
           <p>{incident.description}</p>
 
           <strong>Valor:</strong>
-          <p>R$ {incident.value}</p>
+          <p>
+            {' '}
+            {Intl.NumberFormat('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(incident.value)}
+          </p>
 
-          <button type="button">
+          <button onClick={() => handleDelete(incident.id)} type="button">
             <MdDelete size={28} color="#444" />
           </button>
         </li>

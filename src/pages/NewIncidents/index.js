@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdArrowBack } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import api from '../../services/api';
 
 import { Container, Content } from './styles';
@@ -8,6 +9,37 @@ import logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
 
 export default function NewIncidents() {
+  const history = useHistory();
+  const ongId = localStorage.getItem('ongId');
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [value, setValue] = useState(null);
+
+  async function handleIncidentRegister(e) {
+    e.preventDefault();
+
+    try {
+      await api.post(
+        '/ongs/incidents',
+        {
+          title,
+          description,
+          value,
+        },
+        {
+          headers: {
+            ong_id: ongId,
+          },
+        }
+      );
+
+      toast.success('caso cadastrado');
+      history.push('/profile');
+    } catch (err) {
+      toast.error('erro ao cadastrar caso');
+    }
+  }
   return (
     <Container>
       <Content>
@@ -26,10 +58,28 @@ export default function NewIncidents() {
           </Link>
         </section>
 
-        <form>
-          <input placeholder="Titulo do caso" />
-          <textarea placeholder="Descrição" />
-          <input placeholder="valor" />
+        <form onSubmit={handleIncidentRegister}>
+          <input
+            value={title}
+            onChange={text => {
+              setTitle(text.target.value);
+            }}
+            placeholder="Titulo do caso"
+          />
+          <textarea
+            value={description}
+            onChange={text => {
+              setDescription(text.target.value);
+            }}
+            placeholder="Descrição"
+          />
+          <input
+            value={value}
+            onChange={text => {
+              setValue(text.target.value);
+            }}
+            placeholder="valor"
+          />
 
           <Button type="submit">Cadastrar</Button>
         </form>
