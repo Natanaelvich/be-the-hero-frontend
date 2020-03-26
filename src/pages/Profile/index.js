@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { MdPowerSettingsNew } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
@@ -10,6 +10,7 @@ import Button from '../../components/Button';
 import IncidentsList from '../../components/IncidentsList';
 
 export default function Profile() {
+  const history = useHistory();
   const [incidents, setIncidents] = useState([]);
   const ongName = localStorage.getItem('ongName');
   const ongId = localStorage.getItem('ongId');
@@ -39,6 +40,13 @@ export default function Profile() {
       toast.error('erro ao deletar');
     }
   }
+
+  async function handleLogout() {
+    localStorage.clear();
+
+    history.push('/');
+  }
+
   return (
     <Container>
       <header>
@@ -49,7 +57,7 @@ export default function Profile() {
           <Button type="submit">Cadastrar novo caso</Button>
         </Link>
 
-        <Logout type="button">
+        <Logout onClick={handleLogout} type="button">
           <MdPowerSettingsNew size={28} color="#e02041" />
         </Logout>
       </header>
